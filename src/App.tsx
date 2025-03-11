@@ -1,5 +1,14 @@
+import AppLayout from "./Layout/AppLayout";
+import AppRouter from "./routes/AppRouter";
+
 function App() {
-    return <>shopping mall 수정</>;
+    return (
+        <>
+            <AppLayout>
+                <AppRouter />
+            </AppLayout>
+        </>
+    );
 }
 
 export default App;
