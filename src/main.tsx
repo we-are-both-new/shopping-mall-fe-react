@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router";
 import "./styles/global.css";
 
 createRoot(document.getElementById("root")!).render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 );
