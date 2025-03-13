@@ -22,7 +22,6 @@ const Menu = ({ setIsMenuOpen }: ImenuProps) => {
                 return (
                     <StyledLink className="flex items-center " key={index} to={menu.link} onClick={() => setIsMenuOpen && setIsMenuOpen(false)} data-active={isActive}>
                         {!setIsMenuOpen && <i className="w-4 mr-2">{menu.icon}</i>}
-
                         {menu.name}
                     </StyledLink>
                 );

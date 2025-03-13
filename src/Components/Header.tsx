@@ -25,8 +25,8 @@ const Header = () => {
         setIsMenuOpen(false);
     };
     return (
-        <div className="sticky z-50">
-            <header className="relative border-b  h-30">
+        <div className="sticky top-0 z-60 border-b">
+            <header className="relative h-25 sm:h-30 bg-white">
                 <nav className="h-full">
                     <div className="content-container flex items-center justify-between w-full h-full pl-5 pr-5 sm:pr-10 sm:pl-10 xl:pr-20 xl:pl-20">
                         <div className="absolute left-1/2 transform -translate-x-1/2">
@@ -73,7 +73,7 @@ const Header = () => {
                             <div className="xl:hidden flex items-center flex-1  justify-end">
                                 {/* mo메뉴 */}
                                 <button onClick={openMenu} className="text-gray-800">
-                                    <FaBars size={30} />
+                                    <FaBars size={20} />
                                 </button>
                             </div>
                         ) : (

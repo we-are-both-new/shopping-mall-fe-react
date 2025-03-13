@@ -4,3 +4,8 @@
 body {
     font-family: "Noto Sans KR", sans-serif; /* 기본 폰트를 Noto Sans KR로 설정 */
 }
+
+.keep-all {
+    word-break: keep-all;
+    word-wrap: break-word;
+}

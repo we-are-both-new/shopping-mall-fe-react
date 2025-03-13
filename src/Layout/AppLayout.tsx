@@ -16,7 +16,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         <div className="app-layout">
             <Header />
             {!hideItemsRoutes.includes(location.pathname) && <ItemMenu />}
-            {children}
+            <main className="main-content">{children}</main>
             <Footer />
         </div>
     );
