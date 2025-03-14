@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Item {
+    id: number;
     goods: string;
     price: string;
     src: string;
@@ -15,16 +16,19 @@ interface ItemsState {
 const initialState: ItemsState = {
     items: [
         {
+            id: 0,
             goods: "Jacquard-weave top",
             price: "39,900",
             src: "https://res.cloudinary.com/dyoj0undj/image/upload/v1679837632/ophtekkvf1oyhya8fdwe.jpg",
         },
         {
+            id: 1,
             goods: "스트레이트 팬츠",
             price: "59,900",
             src: "https://res.cloudinary.com/dyoj0undj/image/upload/v1679837681/qjujhpcmmykyoygm2oyg.jpg",
         },
         {
+            id: 2,
             goods: "새틴 드레스",
             price: "69,000",
             src: "https://res.cloudinary.com/dyoj0undj/image/upload/v1679931154/hsjk6ntz6cd9kn7t6n2a.jpg",

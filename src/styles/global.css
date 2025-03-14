@@ -9,3 +9,29 @@ body {
     word-break: keep-all;
     word-wrap: break-word;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+    transform: scale(0.3);
+    color: #000;
+    top: 25px;
+}
+.swiper-button-prev {
+    left: auto;
+    right: 85px;
+}
+.swiper-button-next {
+    right: 5px;
+}
+
+.swiper-pagination {
+    width: fit-content !important;
+    height: fit-content !important;
+    right: 34px !important;
+    top: 11px !important;
+    left: auto !important;
+    bottom: auto !important;
+}
+.swiper-pagination-bullet-active {
+    background: #000;
+}

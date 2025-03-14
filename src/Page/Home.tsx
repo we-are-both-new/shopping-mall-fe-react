@@ -3,29 +3,11 @@ import Search from "../Components/Search";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 
-// 상품디테일
-// const productSchema = Schema(
-//     {
-//       sku: { type: String, required: true, unique: true },
-//       name: { type: String, required: true },
-//       image: { type: String, required: true },
-//       category: { type: Array, required: true },
-//       description: { type: String, required: true },
-//       price: { type: Number, required: true },
-//       stock: { type: Object, required: true }, 재고 관리
-//       status: { type: String, default: "active" },
-//       isDeleted: { type: Boolean, default: false },
-//     },
-//     { timestamps: true }
-//   );
-
 const Home = () => {
     const items = useSelector((state: RootState) => state.items.items);
     const filterItems = useSelector((state: RootState) => state.items.filterItems);
     const itemsToDisplay = filterItems.length > 0 ? filterItems : items;
-
     const Result = useSelector((state: RootState) => state.items.noResult);
-    console.log(Result);
     return (
         <section>
             <div className="w-full ml-auto mr-auto xl:container ">
@@ -44,7 +26,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                         <div className={`w-1/2 pl-10 pr-10 transition-all xl:pl-20 xl:pr-20  ${index % 2 !== 0 ? "text-right md:group-hover:pr-30" : "md:group-hover:pl-30"}`}>
-                                            <Link to={"/"} className="text-xl font-bold keep-all block xl:text-2xl xl:leading-loose">
+                                            <Link to={`/detail/${item.id}`} className="text-xl font-bold keep-all block xl:text-2xl xl:leading-loose">
                                                 {item.goods}
                                             </Link>
                                             <p>₩ {item.price}</p>
