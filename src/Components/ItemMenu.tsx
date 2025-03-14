@@ -10,7 +10,7 @@ const Items = [
 const ItemMenu = () => {
     return (
         <div className="sticky top-25 sm:top-30 z-50 bg-white ">
-            <div className="flex justify-center items-center pt-4 pb-4 xl:pt-7 xl:pb-7 border-b">
+            <div className="flex justify-center items-center pt-4 pb-4 xl:pt-5 xl:pb-5 border-b">
                 {Items.map((item, index) => (
                     <StyledLink className="ml-5 mr-5" key={index} to={item.link}>
                         {item.menu}
