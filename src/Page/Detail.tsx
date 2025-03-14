@@ -76,7 +76,7 @@ const Detail = () => {
                         <div className="w-full sm:w-1/2 pt-5 pb-5 pr- xl:pt-20 xl:pb-20">
                             <div className="ml-auto mr-auto w-[80%] flex flex-col justify-center h-full">
                                 <h2 className="font-bold text-2xl xl:text-4xl mb-5">{items[num].goods}</h2>
-                                <p className="font-500 mb-5">{items[num].price}</p>
+                                <p className="font-500 mb-5">₩ {items[num].price}</p>
                                 <h2 className="mb-10 sm:mb-auto">description</h2>
                                 <Select
                                     className="w-full xl:w-1/2 mb-10"
