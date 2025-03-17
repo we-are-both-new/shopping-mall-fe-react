@@ -10,7 +10,7 @@ interface AppLayoutProps {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
     const location = useLocation();
-    const hideItemsRoutes = ["/mypage", "/login", "/cart"];
+    const hideItemsRoutes = ["/mypage", "/login", "/cart", "/join"];
 
     return (
         <div className="app-layout">

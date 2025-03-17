@@ -4,11 +4,13 @@ import Cart from "../Page/Cart";
 import Mypage from "../Page/Mypage";
 import Login from "../Page/Login";
 import Detail from "../Page/Detail";
+import Join from "../Page/Join";
 
 const AppRouter = () => {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="join" element={<Join />} />
             <Route path="login" element={<Login />} />
             <Route path="cart" element={<Cart />} />
             <Route path="mypage" element={<Mypage />} />
