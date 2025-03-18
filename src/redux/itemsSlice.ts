@@ -42,8 +42,6 @@ const itemsSlice = createSlice({
             })
             .addCase(getProducts.fulfilled, (state, action) => {
                 state.loading = false; // API 호출 완료
-                // action.payload가 Product[] 타입이므로, 그 안의 data만 추출하여 state.items에 할당
-                console.log(action.payload);
                 state.items = action.payload.data; // API에서 받은 data만 사용
             })
             .addCase(getProducts.rejected, (state, action) => {

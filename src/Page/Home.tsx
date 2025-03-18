@@ -1,13 +1,10 @@
 import { Link } from "react-router";
 import Search from "../Components/Search";
-import { useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../redux/store";
-import { getProducts } from "../redux/itemsSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const Home = () => {
-    const dispatch = useDispatch<AppDispatch>(); // dispatch에 AppDispatch 타입을 지정
     const items = useSelector((state: RootState) => state.items.items);
     const filterItems = useSelector((state: RootState) => state.items.filterItems);
     const loading = useSelector((state: RootState) => state.items.loading);
@@ -16,9 +13,6 @@ const Home = () => {
     // 필터가 있을 경우 필터된 항목을 사용
     const itemsToDisplay = filterItems.length > 0 ? filterItems : items;
 
-    useEffect(() => {
-        dispatch(getProducts()); // getProducts 액션 호출
-    }, [dispatch]);
     if (loading) return <p>Loading...</p>;
 
     // 에러가 발생한 경우 에러 메시지 출력

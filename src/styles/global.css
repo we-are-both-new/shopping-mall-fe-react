@@ -29,7 +29,7 @@ button {
 }
 
 .swiper-pagination {
-    width: fit-content !important;
+    width: 50px !important;
     height: fit-content !important;
     right: 34px !important;
     top: 11px !important;
