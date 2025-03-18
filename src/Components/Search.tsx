@@ -32,7 +32,7 @@ const Search = () => {
         }
     };
     const itemSearch = () => {
-        const filterItem = items.filter((item) => item.goods.toLowerCase().includes(inputText.toLowerCase()));
+        const filterItem = items.filter((item) => item.name.toLowerCase().includes(inputText.toLowerCase()));
 
         dispatch(setFilterItem(filterItem));
         dispatch(setResult(filterItem.length === 0));

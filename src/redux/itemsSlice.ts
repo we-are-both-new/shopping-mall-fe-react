@@ -1,54 +1,55 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface Item {
-    id: number;
-    goods: string;
-    price: string;
-    src: string;
-}
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchProducts, IData } from "../api/productApi";
 
 interface ItemsState {
-    items: Item[];
-    filterItems: Item[]; // 필터된 항목 상태 추가
+    items: IData[];
+    loading: boolean;
+    error: string | null;
+    filterItems: IData[]; // 필터된 항목 상태 추가
     noResult: boolean;
 }
 
 const initialState: ItemsState = {
-    items: [
-        {
-            id: 0,
-            goods: "Jacquard-weave top",
-            price: "39,900",
-            src: "https://res.cloudinary.com/dyoj0undj/image/upload/v1679837632/ophtekkvf1oyhya8fdwe.jpg",
-        },
-        {
-            id: 1,
-            goods: "스트레이트 팬츠",
-            price: "59,900",
-            src: "https://res.cloudinary.com/dyoj0undj/image/upload/v1679837681/qjujhpcmmykyoygm2oyg.jpg",
-        },
-        {
-            id: 2,
-            goods: "새틴 드레스",
-            price: "69,000",
-            src: "https://res.cloudinary.com/dyoj0undj/image/upload/v1679931154/hsjk6ntz6cd9kn7t6n2a.jpg",
-        },
-    ],
+    items: [],
+    loading: false,
+    error: null,
     filterItems: [],
     noResult: false,
 };
+
+export const getProducts = createAsyncThunk("items/fetchProducts", async () => {
+    const response = await fetchProducts(); // API 호출
+    return response; // API에서 반환된 데이터를 반환
+});
 
 const itemsSlice = createSlice({
     name: "items",
     initialState,
     reducers: {
-        setFilterItem: (state, action: PayloadAction<Item[]>) => {
+        setFilterItem: (state, action: PayloadAction<IData[]>) => {
             state.filterItems = action.payload;
             state.noResult = action.payload.length === 0;
         },
         setResult: (state, action: PayloadAction<boolean>) => {
             state.noResult = action.payload;
         },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getProducts.pending, (state) => {
+                state.loading = true; // API 호출 시작
+                state.error = null; // 에러 초기화
+            })
+            .addCase(getProducts.fulfilled, (state, action) => {
+                state.loading = false; // API 호출 완료
+                // action.payload가 Product[] 타입이므로, 그 안의 data만 추출하여 state.items에 할당
+                console.log(action.payload);
+                state.items = action.payload.data; // API에서 받은 data만 사용
+            })
+            .addCase(getProducts.rejected, (state, action) => {
+                state.loading = false; // API 호출 실패
+                state.error = action.error.message || "Unknown error";
+            });
     },
 });
 export const { setFilterItem, setResult } = itemsSlice.actions;

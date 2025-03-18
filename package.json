@@ -15,6 +15,7 @@
     "@tailwindcss/postcss": "^4.0.12",
     "@tailwindcss/vite": "^4.0.12",
     "@types/react-router": "^5.1.20",
+    "axios": "^1.8.3",
     "framer-motion": "^12.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
