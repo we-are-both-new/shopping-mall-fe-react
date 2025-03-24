@@ -30,6 +30,7 @@ const itemsSlice = createSlice({
             state.filterItems = action.payload;
             state.noResult = action.payload.length === 0;
         },
+
         setResult: (state, action: PayloadAction<boolean>) => {
             state.noResult = action.payload;
         },

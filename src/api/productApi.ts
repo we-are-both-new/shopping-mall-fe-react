@@ -7,7 +7,7 @@ export interface IData {
     size: ("S" | "M" | "L")[];
     thumbnail: string;
     detailImages: string;
-    category: ("woman" | "man")[];
+    category: string[];
     description: string;
     price: number;
     stock: {
@@ -24,7 +24,7 @@ interface Product {
 }
 export const fetchProducts = async (): Promise<Product[]> => {
     try {
-        const response = await api.get("/product/list");
+        const response = await api.get("/shop/product/list");
         return response.data;
     } catch (error) {
         throw new Error("Error fetching products: " + (error instanceof Error ? error.message : "Unknown error"));

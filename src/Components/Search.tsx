@@ -2,12 +2,13 @@ import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { setFilterItem, setResult } from "../redux/itemsSlice";
-import { useDispatch } from "react-redux";
+import { useParams } from "react-router";
 
 const Search = () => {
+    const { category } = useParams();
     const inputRef = useRef<HTMLInputElement | null>(null);
     const btnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -28,11 +29,25 @@ const Search = () => {
         setInputText(text);
 
         if (text.trim() === "") {
-            dispatch(setFilterItem(items));
+            if (!category || category === "all") {
+                dispatch(setFilterItem(items));
+            } else {
+                const filtered = items.filter((item) => item.category.some((cat) => cat.toLowerCase() === category?.toLowerCase()));
+                dispatch(setFilterItem(filtered));
+            }
         }
     };
+
     const itemSearch = () => {
-        const filterItem = items.filter((item) => item.name.toLowerCase().includes(inputText.toLowerCase()));
+        let filterItem = items;
+
+        if (inputText.trim() !== "") {
+            filterItem = filterItem.filter((item) => item.name.toLowerCase().includes(inputText.toLowerCase()));
+        }
+
+        if (category && category !== "all") {
+            filterItem = filterItem.filter((item) => item.category.some((cat) => cat.toLowerCase() === category?.toLowerCase()));
+        }
 
         dispatch(setFilterItem(filterItem));
         dispatch(setResult(filterItem.length === 0));
@@ -66,27 +81,25 @@ const Search = () => {
     }, [handleScroll, inputText]);
 
     return (
-        <>
-            <div className="flex fixed left-auto z-50 top-45 lg:top-60 right-0 xl:right-[calc(50%-595px)] 2xl:right-[calc(50%-724px)] items-center overflow-hidden">
-                <motion.input
-                    onChange={handleInputChange}
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                            itemSearch();
-                        }
-                    }}
-                    ref={inputRef}
-                    variants={InputVariants(isOpen, inputWidth)}
-                    initial="inital"
-                    animate="animate"
-                    className="w-40 sm:w-full border-b p-2 focus:outline-none "
-                    placeholder="제품 검색"
-                />
-                <button ref={btnRef} onClick={inputText ? itemSearch : toggleClick} className=" flex items-center p-2 cursor-pointer">
-                    {inputText || !isOpen ? <FaSearch size={20} /> : <IoCloseSharp size={20} />}
-                </button>
-            </div>
-        </>
+        <div className="flex fixed left-auto z-50 top-45 lg:top-60 right-0 xl:right-[calc(50%-595px)] 2xl:right-[calc(50%-724px)] items-center overflow-hidden">
+            <motion.input
+                onChange={handleInputChange}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        itemSearch();
+                    }
+                }}
+                ref={inputRef}
+                variants={InputVariants(isOpen, inputWidth)}
+                initial="inital"
+                animate="animate"
+                className="w-40 sm:w-full border-b p-2 focus:outline-none "
+                placeholder="제품 검색"
+            />
+            <button ref={btnRef} onClick={inputText ? itemSearch : toggleClick} className=" flex items-center p-2 cursor-pointer">
+                {inputText || !isOpen ? <FaSearch size={20} /> : <IoCloseSharp size={20} />}
+            </button>
+        </div>
     );
 };
 
